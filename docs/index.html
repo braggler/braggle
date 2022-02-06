@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Braggle</title>
+  <style>
+    a, a:link {
+            text-decoration: none;
+    }
+    a.definition-link {
+      background: url(https://developer.mozilla.org/static/media/external.e091ac5d.svg) center right no-repeat;
+      padding: 1em;
+      background-size: 1em;
+    }
+    html {
+      font-family: Arial;
+      text-align: center;
+    }
+    .heading {
+      font-size: 2em;
+      font-weight: bold;
+      text-align: center;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      border: none;
+      color: white;
+    }
+    table, td, tr {
+      padding: 0px;
+      margin: 0px;
+      vertical-align: middle;
+    }
+    table.center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    td {
+      border: 1px solid lightgray;
+    }
+    td.definition-link-wrapper {
+      font-size: 1.5em;
+      border: none;
+    }
+    tr {
+      border: none;
+    }
+    .board {
+    }
+    .block, .block-none, .block-guess, .block-clue-absent, .block-clue-correct, .block-clue-present {
+      font-family: Arial;
+      font-size: 1.8em;
+      font-weight: bold;
+      text-align: center;
+      width: 1.5em;
+    }
+    .block-none {
+      background-color: white;
+      color: white;
+    }
+    .block-guess {
+      background-color: white;
+      color: black;
+    }
+    .block-clue-absent {
+      background-color: gray;
+    }
+    .block-clue-correct {
+      background-color: darkseagreen;
+    }
+    .block-clue-present {
+      background-color: tan;
+    }
+    .blurb {
+      font-size: 0.75em;
+      font-style: italic;
+      text-align: center;
+    }
+    .definition-link {
+      border: none;
+      font-size: 0.75em;
+      underline: none;
+    }
+    .empty {
+      background-size: 1em;
+      border: none;
+      padding: 1em;
+    }
+    .control, .control-reload {
+      background-color: white;
+      border: none;
+      display: inline-block;
+      font-family: monospace;
+      font-size: 1em;
+      text-align: center;
+      text-decoration: none;
+    }
+    .control-header {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .control-reload {
+      font-size: 1em;
+    }
+    .key, .key-absent, .key-correct, .key-present {
+      border-radius: 8px;
+      border: none;
+      display: inline-block;
+      font-family: monospace;
+      font-size: 1.25em;
+      margin: 0.5em 0.25em 0.5em 0.25em;
+      padding: 0.5em;
+      text-decoration: none;
+    }
+    .key {
+      background-color: lightgray;
+    }
+    .key-absent {
+      background-color: gray;
+    }
+    .key-correct {
+      background-color: darkseagreen;
+    }
+    .key-present {
+      background-color: tan;
+    }
+    .keyboard {
+      text-align: center;
+    }
+    .status {
+      font-size: 1em;
+      text-align: center;
+    }
+  </style>
+
+<link rel="preload" href="/braggle/index-98022c45fc020ed_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/braggle/index-98022c45fc020ed.js"></head>
+<body>
+<div class="header">
+  <span class="heading">Braggle!</span>
+  <br>
+  <span class="blurb">
+    Use your
+    <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
+    skills to learn and practice Scrabble words
+  </span>
+</div>
+<br>
+<div id="app"></div>
+
+
+<script type="module">import init from '/braggle/index-98022c45fc020ed.js';init('/braggle/index-98022c45fc020ed_bg.wasm');</script>
+</body></html>
