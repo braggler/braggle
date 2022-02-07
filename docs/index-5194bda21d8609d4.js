@@ -302,7 +302,7 @@ async function load(module, imports) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('braggle/index-98022c45fc020ed_bg.wasm', import.meta.url);
+        input = new URL('braggle/index-5194bda21d8609d4_bg.wasm', import.meta.url);
     }
     const imports = {};
     imports.wbg = {};

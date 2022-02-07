@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Braggle</title>
   <style>
     a, a:link {
@@ -87,9 +87,10 @@
       border: none;
       padding: 1em;
     }
-    .control, .control-reload {
+    .control, .control-info, .control-reload {
       background-color: white;
       border: none;
+      cursor: pointer;
       display: inline-block;
       font-family: monospace;
       font-size: 1em;
@@ -101,12 +102,32 @@
       margin-right: auto;
       text-align: center;
     }
-    .control-reload {
+    .control-close {
       font-size: 1em;
+    }
+    .control-info {
+      color: blue;
+      font-size: 1.5em;
+    }
+    .control-reload {
+      font-size: 1.5em;
+    }
+    .info-modal {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      width: 23em;
+    }
+    .info-modal-content {
+      border-radius: 5px;
+      box-shadow: 5px 5px 5px lightgray;
+      margin-bottom: 1em;
+      padding: 1em 2em 1em 2em;
     }
     .key, .key-absent, .key-correct, .key-present {
       border-radius: 8px;
       border: none;
+      cursor: pointer;
       display: inline-block;
       font-family: monospace;
       font-size: 1.25em;
@@ -133,23 +154,77 @@
       font-size: 1em;
       text-align: center;
     }
+
+
+
+
+
+
+
+
+
+
+
+
   </style>
 
-<link rel="preload" href="/braggle/index-98022c45fc020ed_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/braggle/index-98022c45fc020ed.js"></head>
+<link rel="preload" href="/braggle/index-5194bda21d8609d4_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/braggle/index-5194bda21d8609d4.js"></head>
 <body>
 <div class="header">
-  <span class="heading">Braggle!</span>
-  <br>
-  <span class="blurb">
-    Use your
-    <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
-    skills to learn and practice Scrabble words
-  </span>
+  <div style="text-align: center">
+    <span class="heading">Braggle</span>
+    <span class="info-modal">
+      <button onclick="document.getElementById('id-info-modal').style.display='block'" class="control-info">ⓘ</button>
+    </span>
+  </div>
 </div>
 <br>
+<div id="id-info-modal" class="info-modal" style="display: none;">
+  <div class="info-modal-content">
+    <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'" style="cursor: pointer; text-align: right; text-decoration: underline">✕
+    </div>
+    <div style="text-align: left; font-size: 0.8em">
+      <p class="blurb">
+        Use
+        <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
+        skills to learn Scrabble words
+      </p>
+      <h1>Info</h1>
+      <p>
+        Try and guess the secret word.
+        The secret word is selected at random from allowed Scrabble words.
+        Guesses may be any allowed.</p>
+      <p>
+        You may choose the length of the words. There are:
+      </p>
+      <ul>
+        <li>1,065 three letter words,</li>
+        <li>3,997 four letter words, and</li>
+        <li>24,004 seven letter words.</li>
+      </ul>
+      <p>Clues are</p>
+      <ul>
+        <li>
+          <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position.
+        </li>
+        <li>
+          <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position.
+        </li>
+        <li>
+          <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word.
+        </li>
+      </ul>
+      Note that if you get a word with
+      <span class="block-clue-correct" style="font-size: 1em;">A</span>
+      and
+      <span class="block-clue-present" style="font-size: 1em;">A</span>
+      it may be that 'A' only appears once.
+    </div>
+  </div>
+</div>
 <div id="app"></div>
 
 
-<script type="module">import init from '/braggle/index-98022c45fc020ed.js';init('/braggle/index-98022c45fc020ed_bg.wasm');</script>
+<script type="module">import init from '/braggle/index-5194bda21d8609d4.js';init('/braggle/index-5194bda21d8609d4_bg.wasm');</script>
 </body></html>
