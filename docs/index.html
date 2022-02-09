@@ -10,6 +10,8 @@
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
+
+
   </script>
   <style>
     a, a:link {
@@ -187,6 +189,8 @@
     }
 
 
+
+
   </style>
 
 <link rel="preload" href="/index-1df9c2c0722a9dc1_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
@@ -261,10 +265,10 @@
     <div class="control-close" onclick="document.getElementById('id-stats-modal').style.display='none'">
       ✕
     </div>
-    Played: <span id="id-stats-played"></span><br>
+    <div style="padding-bottom: 0.5em; text-decoration: underline;">Played</div>
+    <span id="id-stats-played"></span><br>
     <br>
-    Wins<br>
-    <br>
+    <div style="padding-bottom: 0.5em; text-decoration: underline;">Wins</div>
     <table>
       <tbody><tr>
         <td class="stats-won">1 guess
