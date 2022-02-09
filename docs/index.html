@@ -107,7 +107,10 @@
       text-align: center;
     }
     .control-close {
-      font-size: 1em;
+      color: gray;
+      cursor: pointer;
+      text-align: right;
+      text-decoration: underline;
     }
     .control-info {
       color: dimgray;
@@ -159,6 +162,9 @@
       text-align: center;
     }
 
+
+
+
   </style>
 
 <link rel="preload" href="/index-906d88e7bdb08024_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
@@ -181,7 +187,8 @@
 <br>
 <div id="id-info-modal" class="info-modal" style="display: none;">
   <div class="info-modal-content">
-    <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'" style="cursor: pointer; text-align: right; text-decoration: underline">✕
+    <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'">
+      ✕
     </div>
     <div style="text-align: left; font-size: 0.8em">
       <p class="blurb">
@@ -189,7 +196,6 @@
         <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
         skills to learn Scrabble words
       </p>
-      <h1>Info</h1>
       <p>
         Try and guess the secret word.
         The secret word is selected at random from allowed Scrabble words.
@@ -202,13 +208,13 @@
         <li>3,997 four letter words, and</li>
         <li>24,004 seven letter words.</li>
       </ul>
-      <p>Clues are</p>
+      <p>Clues:</p>
       <ul>
         <li>
-          <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position.
+          <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position,
         </li>
         <li>
-          <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position.
+          <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position, and
         </li>
         <li>
           <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word.
@@ -218,8 +224,8 @@
         Note that if a guess contains the clues
         <span class="block-clue-correct" style="font-size: 1em;">A</span>
         and
-        <span class="block-clue-present" style="font-size: 1em;">A</span>
-        it may be that the letter A only appears once in the secret word.
+        <span class="block-clue-present" style="font-size: 1em;">A</span>,
+        it may be that A only appears once in the secret word.
       </p>
     </div>
   </div>
