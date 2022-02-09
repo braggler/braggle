@@ -2,6 +2,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Braggle</title>
+  <script>
+    function getStats() {
+      document.getElementById("id-stats-played").innerText = localStorage.getItem("played") || "0";
+      for (let i = 1; i < 9; ++i) {
+        let wins = localStorage.getItem(1);
+        document.getElementById("id-stats-won-in-" + i).innerText = localStorage.getItem(i) || "0";
+      }
+    }
+  </script>
   <style>
     a, a:link {
             text-decoration: none;
@@ -12,12 +21,12 @@
       background-size: 1em;
     }
     html {
-      font-family: Arial;
+      font-family: Sans-Serif;
       text-align: center;
     }
     .heading {
       font-family: monospace;
-      font-size: 2em;
+      font-size: 2.5em;
       font-weight: bold;
       text-align: center;
       text-decoration: underline;
@@ -49,6 +58,7 @@
       border: none;
     }
     .board {
+      margin-bottom: 2em;
     }
     .block, .block-none, .block-guess, .block-clue-absent, .block-clue-correct, .block-clue-present {
       font-family: Arial;
@@ -89,7 +99,7 @@
       border: none;
       padding: 1em;
     }
-    .control, .control-info, .control-reload {
+    .control, .control-info, .control-reload, .control-stats {
       background-color: white;
       border: none;
       color: gray;
@@ -104,6 +114,7 @@
       color: dimgray;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 2em;
       text-align: center;
     }
     .control-close {
@@ -112,24 +123,32 @@
       text-align: right;
       text-decoration: underline;
     }
-    .control-info {
+    .control-info, .control-stats {
       color: dimgray;
       font-size: 1.5em;
+    }
+    .control-info {
+      font-size: 1.5em;
+    }
+    .control-stats {
+      font-size: 1.25em;
     }
     .control-reload {
       font-size: 1.5em;
     }
-    .info-modal {
+    .modal {
       margin-left: auto;
       margin-right: auto;
       text-align: center;
       width: 23em;
     }
-    .info-modal-content {
+    .modal-content {
       border-radius: 5px;
       box-shadow: 5px 5px 5px lightgray;
+      font-size: 0.8em;
       margin-bottom: 1em;
       padding: 1em 2em 1em 2em;
+      text-align: left;
     }
     .key, .key-absent, .key-correct, .key-present {
       border-radius: 8px;
@@ -158,14 +177,16 @@
       text-align: center;
     }
     .status {
-      font-size: 1em;
+      font-size: 0.9em;
       margin-bottom: 1em;
       text-align: center;
     }
+
+
   </style>
 
-<link rel="preload" href="/index-f42d20eb6aa598d3_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-f42d20eb6aa598d3.js"></head>
+<link rel="preload" href="/index-484c51d4c20bc00d_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-484c51d4c20bc00d.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
@@ -176,58 +197,78 @@
     <span class="heading">G</span>
     <span class="heading">L</span>
     <span class="heading">E</span>
-    <span class="info-modal">
+    &nbsp;
+    <span class="modal">
       <button onclick="document.getElementById('id-info-modal').style.display='block'" class="control-info">ⓘ</button>
+    </span>
+    <span class="modal">
+      <button onclick="getStats(); document.getElementById('id-stats-modal').style.display='block';" class="control-stats">📊</button>
     </span>
   </div>
 </div>
 <br>
-<div id="id-info-modal" class="info-modal" style="display: none;">
-  <div class="info-modal-content">
+<br>
+<div id="id-info-modal" class="modal" style="display: none;">
+  <div class="modal-content">
     <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'">
       ✕
     </div>
-    <div style="text-align: left; font-size: 0.8em">
-      <p class="blurb">
-        Use
-        <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
-        skills to learn Scrabble words
-      </p>
-      <p>
-        Try and guess the secret word.
-        The secret word is selected at random from allowed Scrabble words.
-      </p>
-      <p>
-        You may choose the length of the words. There are:
-      </p>
-      <ul>
-        <li>1,065 three letter words,</li>
-        <li>3,997 four letter words, and</li>
-        <li>24,004 seven letter words.</li>
-      </ul>
-      <p>Clues:</p>
-      <ul>
-        <li>
-          <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position,
-        </li>
-        <li>
-          <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position, and
-        </li>
-        <li>
-          <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word.
-        </li>
-      </ul>
-      <p>
-        Note that if a guess contains the clues
-        <span class="block-clue-correct" style="font-size: 1em;">A</span>
+    <p class="blurb">
+      Use
+      <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
+      skills to learn Scrabble words
+    </p>
+    <p>
+      Try and guess the secret word.
+      The secret word is selected at random from allowed Scrabble words.
+    </p>
+    <p>
+      You may choose the length of the words. There are:
+    </p>
+    <ul>
+      <li>1,065 three letter words,</li>
+      <li>3,997 four letter words, and</li>
+      <li>24,004 seven letter words.</li>
+    </ul>
+    <p>Clues:</p>
+    <ul>
+      <li>
+        <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position,
+      </li>
+      <li>
+        <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position,
         and
-        <span class="block-clue-present" style="font-size: 1em;">A</span>,
-        it may be that A only appears once in the secret word.
-      </p>
+      </li>
+      <li>
+        <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word.
+      </li>
+    </ul>
+    <p>
+      Note that if a guess contains the clues
+      <span class="block-clue-correct" style="font-size: 1em;">A</span>
+      and
+      <span class="block-clue-present" style="font-size: 1em;">A</span>,
+      it may be that A only appears once in the secret word.
+    </p>
+  </div>
+</div>
+<div id="id-stats-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="control-close" onclick="document.getElementById('id-stats-modal').style.display='none'">
+      ✕
     </div>
+    Played: <span id="id-stats-played"></span><br>
+    Won in 1 guess: <span id="id-stats-won-in-1"></span><br>
+    Won in 2 guesses: <span id="id-stats-won-in-2"></span><br>
+    Won in 3 guesses: <span id="id-stats-won-in-3"></span><br>
+    Won in 4 guesses: <span id="id-stats-won-in-4"></span><br>
+    Won in 5 guesses: <span id="id-stats-won-in-5"></span><br>
+    Won in 6 guesses: <span id="id-stats-won-in-6"></span><br>
+    Won in 7 guesses: <span id="id-stats-won-in-7"></span><br>
+    Won in 8 guesses: <span id="id-stats-won-in-8"></span><br>
   </div>
 </div>
 <div id="app"></div>
 
 
-<script type="module">import init from '/index-f42d20eb6aa598d3.js';init('/index-f42d20eb6aa598d3_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-484c51d4c20bc00d.js';init('/index-484c51d4c20bc00d_bg.wasm');</script></body></html>
