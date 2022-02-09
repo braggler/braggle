@@ -7,7 +7,7 @@
       document.getElementById("id-stats-played").innerText = localStorage.getItem("played") || "0";
       for (let i = 1; i < 9; ++i) {
         let wins = localStorage.getItem(1);
-        document.getElementById("id-stats-won-in-" + i).innerText = localStorage.getItem(i) || "0";
+        document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
   </script>
@@ -36,7 +36,6 @@
     }
     table {
       border: none;
-      color: white;
     }
     table, td, tr {
       padding: 0px;
@@ -49,6 +48,10 @@
     }
     td {
       border: 1px solid lightgray;
+    }
+    td.stats-won {
+      font-size: 0.9em;
+      border: none;
     }
     td.definition-link-wrapper {
       font-size: 1.5em;
@@ -258,14 +261,43 @@
       ✕
     </div>
     Played: <span id="id-stats-played"></span><br>
-    Won in 1 guess: <span id="id-stats-won-in-1"></span><br>
-    Won in 2 guesses: <span id="id-stats-won-in-2"></span><br>
-    Won in 3 guesses: <span id="id-stats-won-in-3"></span><br>
-    Won in 4 guesses: <span id="id-stats-won-in-4"></span><br>
-    Won in 5 guesses: <span id="id-stats-won-in-5"></span><br>
-    Won in 6 guesses: <span id="id-stats-won-in-6"></span><br>
-    Won in 7 guesses: <span id="id-stats-won-in-7"></span><br>
-    Won in 8 guesses: <span id="id-stats-won-in-8"></span><br>
+    <br>
+    Wins<br>
+    <br>
+    <table>
+      <tbody><tr>
+        <td class="stats-won">1 guess
+        </td><td id="id-stats-won-in-1" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">2 guesses
+        </td><td id="id-stats-won-in-2" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">3 guesses
+        </td><td id="id-stats-won-in-3" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">4 guesses
+        </td><td id="id-stats-won-in-4" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">5 guesses
+        </td><td id="id-stats-won-in-5" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">6 guesses
+        </td><td id="id-stats-won-in-6" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">7 guesses
+        </td><td id="id-stats-won-in-7" class="stats-won"></td>
+      </tr>
+      <tr>
+        <td class="stats-won">8 guesses
+        </td><td id="id-stats-won-in-8" class="stats-won"></td>
+      </tr>
+    </tbody></table>
   </div>
 </div>
 <div id="app"></div>
