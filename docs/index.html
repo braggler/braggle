@@ -197,11 +197,15 @@
     }
   </style>
 
-<link rel="preload" href="/index-5d057275f09144c7_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-5d057275f09144c7.js"></head>
+<link rel="preload" href="/index-cd4a299b6cf1fb84_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-cd4a299b6cf1fb84.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
+    <span class="modal">
+      <button class="control-info" onclick="document.getElementById('id-info-modal').style.display='block'" title="info &amp; help">ⓘ</button>
+    </span>
+    &nbsp;
     <span class="heading">B</span>
     <span class="heading">R</span>
     <span class="heading">A</span>
@@ -211,10 +215,7 @@
     <span class="heading">E</span>
     &nbsp;
     <span class="modal">
-      <button onclick="document.getElementById('id-info-modal').style.display='block'" class="control-info">ⓘ</button>
-    </span>
-    <span class="modal">
-      <button onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" class="control-stats">📊</button>
+      <button class="control-stats" onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" title="stats">📊</button>
     </span>
   </div>
 </div>
@@ -302,7 +303,7 @@
     </tbody></table>
   </div>
 </div>
-<div id="app"></div>
+<div id="id-app"></div>
 
 
-<script type="module">import init from '/index-5d057275f09144c7.js';init('/index-5d057275f09144c7_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-cd4a299b6cf1fb84.js';init('/index-cd4a299b6cf1fb84_bg.wasm');</script></body></html>
