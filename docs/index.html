@@ -3,14 +3,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Braggle</title>
   <script>
-    function getStats() {
-      document.getElementById("id-stats-played").innerText = localStorage.getItem("played") || "0";
-      for (let i = 1; i < 8; ++i) {
+    function populateStats() {
+      // Keep the following in sync with app.rs
+      const n_guesses = 7;
+      const played_key = "played";
+
+      // Populate the info modal elements to display the game stats.
+      document.getElementById("id-stats-played").innerText = localStorage.getItem(played_key) || "0";
+      for (let i = 1; i <= n_guesses; ++i) {
         let wins = localStorage.getItem(1);
+        // The key for games won in i guesses is i.
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
-
   </script>
   <style>
     a, a:link {
@@ -99,12 +104,16 @@
     .definition-image {
       width: 1em;
     }
+    .share-image {
+      height: 20px;
+      margin-top: 1em;
+    }
     .empty {
       background-size: 1em;
       border: none;
       padding: 1em;
     }
-    .control, .control-info, .control-reload, .control-stats {
+    .control, .control-info, .control-reload, .control-share, .control-stats {
       background-color: white;
       border: none;
       color: gray;
@@ -186,11 +195,10 @@
       margin-bottom: 1em;
       text-align: center;
     }
-
   </style>
 
-<link rel="preload" href="/index-c491e0b6d52d22d1_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-c491e0b6d52d22d1.js"></head>
+<link rel="preload" href="/index-5d057275f09144c7_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-5d057275f09144c7.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
@@ -206,7 +214,7 @@
       <button onclick="document.getElementById('id-info-modal').style.display='block'" class="control-info">ⓘ</button>
     </span>
     <span class="modal">
-      <button onclick="getStats(); document.getElementById('id-stats-modal').style.display='block';" class="control-stats">📊</button>
+      <button onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" class="control-stats">📊</button>
     </span>
   </div>
 </div>
@@ -297,4 +305,4 @@
 <div id="app"></div>
 
 
-<script type="module">import init from '/index-c491e0b6d52d22d1.js';init('/index-c491e0b6d52d22d1_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-5d057275f09144c7.js';init('/index-5d057275f09144c7_bg.wasm');</script></body></html>
