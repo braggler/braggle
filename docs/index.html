@@ -5,20 +5,16 @@
   <script>
     function getStats() {
       document.getElementById("id-stats-played").innerText = localStorage.getItem("played") || "0";
-      for (let i = 1; i < 9; ++i) {
+      for (let i = 1; i < 8; ++i) {
         let wins = localStorage.getItem(1);
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
+
   </script>
   <style>
     a, a:link {
             text-decoration: none;
-    }
-    a.definition-link {
-      background: url(https://developer.mozilla.org/static/media/external.e091ac5d.svg) center right no-repeat;
-      padding: 1em;
-      background-size: 1em;
     }
     html {
       font-family: Sans-Serif;
@@ -59,8 +55,8 @@
       padding-right: 1em;
     }
     td.definition-link-wrapper {
-      font-size: 1.5em;
       border: none;
+      vertical-align: top;
     }
     tr {
       border: none;
@@ -100,10 +96,8 @@
       font-style: italic;
       text-align: center;
     }
-    .definition-link {
-      border: none;
-      font-size: 0.75em;
-      underline: none;
+    .definition-image {
+      width: 1em;
     }
     .empty {
       background-size: 1em;
@@ -192,10 +186,11 @@
       margin-bottom: 1em;
       text-align: center;
     }
+
   </style>
 
-<link rel="preload" href="/index-46f413e06642c70d_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-46f413e06642c70d.js"></head>
+<link rel="preload" href="/index-c491e0b6d52d22d1_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-c491e0b6d52d22d1.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
@@ -295,9 +290,6 @@
       <tr>
         <td class="stats-won">4 guesses
         </td><td id="id-stats-won-in-4" class="stats-won"></td>
-        <td class="stats-won-divider">&nbsp;</td>
-        <td class="stats-won">8 guesses
-        </td><td id="id-stats-won-in-8" class="stats-won"></td>
       </tr>
     </tbody></table>
   </div>
@@ -305,4 +297,4 @@
 <div id="app"></div>
 
 
-<script type="module">import init from '/index-46f413e06642c70d.js';init('/index-46f413e06642c70d_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-c491e0b6d52d22d1.js';init('/index-c491e0b6d52d22d1_bg.wasm');</script></body></html>
