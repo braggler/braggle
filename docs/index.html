@@ -16,6 +16,8 @@
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
+
+
   </script>
   <style>
     a, a:link {
@@ -100,6 +102,13 @@
       font-size: 0.75em;
       font-style: italic;
       text-align: center;
+    }
+    .clipboard {
+      color: white;
+      border: none;
+      left:-1000px;
+      position: absolute;
+      top:-1000px;
     }
     .definition-image {
       width: 1em;
@@ -195,10 +204,12 @@
       margin-bottom: 1em;
       text-align: center;
     }
+
+
   </style>
 
-<link rel="preload" href="/index-cd4a299b6cf1fb84_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-cd4a299b6cf1fb84.js"></head>
+<link rel="preload" href="/index-ee96bc9cf9a58d2_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-ee96bc9cf9a58d2.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
@@ -221,6 +232,7 @@
 </div>
 <br>
 <br>
+<textarea id="id-clipboard" class="clipboard">&lt;</textarea>
 <div id="id-info-modal" class="modal" style="display: none;">
   <div class="modal-content">
     <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'">
@@ -306,4 +318,4 @@
 <div id="id-app"></div>
 
 
-<script type="module">import init from '/index-cd4a299b6cf1fb84.js';init('/index-cd4a299b6cf1fb84_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-ee96bc9cf9a58d2.js';init('/index-ee96bc9cf9a58d2_bg.wasm');</script></body></html>
