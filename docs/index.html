@@ -7,7 +7,6 @@
       // Keep the following in sync with app.rs
       const n_guesses = 7;
       const played_key = "played";
-
       // Populate the info modal elements to display the game stats.
       document.getElementById("id-stats-played").innerText = localStorage.getItem(played_key) || "0";
       for (let i = 1; i <= n_guesses; ++i) {
@@ -16,7 +15,6 @@
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
-
   </script>
   <style>
     a, a:link {
@@ -121,7 +119,7 @@
       border: none;
       padding: 1em;
     }
-    .control, .control-info, .control-reload, .control-share, .control-stats {
+    .control, .control-challenge, .control-info, .control-reload, .control-share, .control-stats {
       background-color: white;
       border: none;
       color: gray;
@@ -138,6 +136,10 @@
       margin-right: auto;
       margin-bottom: 2em;
       text-align: center;
+    }
+    .challenge-image {
+      height: 1em;
+      margin-top: 1em;
     }
     .control-close {
       color: gray;
@@ -200,11 +202,10 @@
       margin-bottom: 1em;
       text-align: center;
     }
-
   </style>
 
-<link rel="preload" href="/index-afa78d7f75f78c4d_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-afa78d7f75f78c4d.js"></head>
+<link rel="preload" href="/index-1ef1984c2b14bc2c_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-1ef1984c2b14bc2c.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
@@ -314,4 +315,4 @@
 <div id="id-app"></div>
 
 
-<script type="module">import init from '/index-afa78d7f75f78c4d.js';init('/index-afa78d7f75f78c4d_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-1ef1984c2b14bc2c.js';init('/index-1ef1984c2b14bc2c_bg.wasm');</script></body></html>
