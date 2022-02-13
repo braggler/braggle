@@ -15,6 +15,8 @@
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
+
+
   </script>
   <style>
     a, a:link {
@@ -202,10 +204,12 @@
       margin-bottom: 1em;
       text-align: center;
     }
+
+
   </style>
 
-<link rel="preload" href="/index-a05a56ab4dd3c1ba_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-a05a56ab4dd3c1ba.js"></head>
+<link rel="preload" href="/index-d153a43233d26928_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-d153a43233d26928.js"></head>
 <body>
 <div class="header">
   <div style="text-align: center">
@@ -262,16 +266,10 @@
         and
       </li>
       <li>
-        <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word.
+        <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word, or is redundant in the
+        guess.
       </li>
     </ul>
-    <p>
-      Note that if a guess contains the clues
-      <span class="block-clue-correct" style="font-size: 1em;">A</span>
-      and
-      <span class="block-clue-present" style="font-size: 1em;">A</span>,
-      it may be that A only appears once in the secret word.
-    </p>
   </div>
 </div>
 <div id="id-stats-modal" class="modal" style="display: none;">
@@ -315,4 +313,4 @@
 <div id="id-app"></div>
 
 
-<script type="module">import init from '/index-a05a56ab4dd3c1ba.js';init('/index-a05a56ab4dd3c1ba_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-d153a43233d26928.js';init('/index-d153a43233d26928_bg.wasm');</script></body></html>
