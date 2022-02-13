@@ -302,7 +302,7 @@ async function load(module, imports) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('index-1ef1984c2b14bc2c_bg.wasm', import.meta.url);
+        input = new URL('index-8d55ae388e4d4c44_bg.wasm', import.meta.url);
     }
     const imports = {};
     imports.wbg = {};
@@ -494,8 +494,8 @@ async function init(input) {
         var ret = getObject(arg0).removeChild(getObject(arg1));
         return addHeapObject(ret);
     }, arguments) };
-    imports.wbg.__wbg_pathname_d0014089875ea691 = function() { return handleError(function (arg0, arg1) {
-        var ret = getObject(arg1).pathname;
+    imports.wbg.__wbg_search_7e1c9ba7f3985c36 = function() { return handleError(function (arg0, arg1) {
+        var ret = getObject(arg1).search;
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
