@@ -17,14 +17,31 @@
     }
   </script>
   <style>
+    :root {
+      --app-width: 25em;  /* Calculated to prevent keyboard rows from wrapping. */
+      --background-color: white;
+      --clue-correct-color: darkseagreen;
+      --clue-present-color: tan;
+      --clue-absent-color: gray;
+      --modal-width: 24em;  /* Smaller than --app-width. */
+    }
     a, a:link {
             text-decoration: none;
+    }
+    /* Section default layout */
+    div.section {
+      /* border: 1px solid gray; // FOR LAYOUT DEBUG */
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1em;
+      text-align: center;
+      width: var(--app-width);
     }
     html {
       font-family: Sans-Serif;
       text-align: center;
     }
-    .heading {
+    .title {
       font-family: monospace;
       font-size: 2.5em;
       font-weight: bold;
@@ -65,8 +82,11 @@
     tr {
       border: none;
     }
-    .board {
-      margin-bottom: 2em;
+    .app-container {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      width: var(--app-width);
     }
     .block, .block-none, .block-guess, .block-clue-absent, .block-clue-correct, .block-clue-present {
       font-family: Arial;
@@ -76,24 +96,24 @@
       width: 1.5em;
     }
     .block-none {
-      background-color: white;
-      color: white;
+      background-color: var(--background-color);
+      color: var(--background-color);
     }
     .block-guess {
-      background-color: white;
+      background-color: var(--background-color);
       color: black;
     }
     .block-clue-absent {
-      background-color: gray;
-      color: white;
+      background-color: var(--clue-absent-color);
+      color: var(--background-color);
     }
     .block-clue-correct {
-      background-color: darkseagreen;
-      color: white;
+      background-color: var(--clue-correct-color);
+      color: var(--background-color);
     }
     .block-clue-present {
-      background-color: tan;
-      color: white;
+      background-color: var(--clue-present-color);
+      color: var(--background-color);
     }
     .blurb {
       font-size: 0.75em;
@@ -101,7 +121,7 @@
       text-align: center;
     }
     .clipboard {
-      color: white;
+      color: var(--background-color);
       border: none;
       left:-1000px;
       position: absolute;
@@ -120,7 +140,7 @@
       padding: 1em;
     }
     .control, .control-challenge, .control-info, .control-reload, .control-share, .control-stats {
-      background-color: white;
+      background-color: var(--background-color);
       border: none;
       color: gray;
       cursor: pointer;
@@ -130,13 +150,6 @@
       text-align: center;
       text-decoration: none;
     }
-    .control-header {
-      color: dimgray;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 2em;
-      text-align: center;
-    }
     .challenge-image {
       height: 1em;
       margin-top: 1em;
@@ -144,6 +157,7 @@
     .control-close {
       color: gray;
       cursor: pointer;
+      font-size: 1.25em;
       text-align: right;
       text-decoration: underline;
     }
@@ -158,18 +172,18 @@
       font-size: 1.5em;
     }
     .modal {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      width: 23em;
+      display: none;
     }
     .modal-content {
+      background-color: var(--background-color);
       border-radius: 5px;
       box-shadow: 5px 5px 5px lightgray;
       font-size: 0.8em;
-      margin-bottom: 1em;
       padding: 1em 2em 1em 2em;
+      position: absolute;
       text-align: left;
+      top: 0;
+      width: var(--modal-width);
     }
     .key, .key-absent, .key-correct, .key-present {
       border-radius: 8px;
@@ -186,127 +200,136 @@
       background-color: lightgray;
     }
     .key-absent {
-      background-color: gray;
+      background-color: var(--clue-absent-color);
     }
     .key-correct {
-      background-color: darkseagreen;
+      background-color: var(--clue-correct-color);
     }
     .key-present {
-      background-color: tan;
+      background-color: var(--clue-present-color);
     }
-    .keyboard {
-      text-align: center;
+    #id-keyboard {
     }
     .status {
       font-size: 1em;
       margin-bottom: 1em;
       text-align: center;
     }
+   #id-title-container {
+     display: flex;
+   }
   </style>
 
-<link rel="preload" href="/index-1680d66adfbb390c_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-1680d66adfbb390c.js"></head>
+<link rel="preload" href="/index-618eac5bc8c07afe_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-618eac5bc8c07afe.js"></head>
 <body>
-<div class="header">
-  <div style="text-align: center">
-    <span class="modal">
-      <button class="control-info" onclick="document.getElementById('id-info-modal').style.display='block'" title="info &amp; help">ⓘ</button>
-    </span>
-    &nbsp;
-    <span class="heading">B</span>
-    <span class="heading">R</span>
-    <span class="heading">A</span>
-    <span class="heading">G</span>
-    <span class="heading">G</span>
-    <span class="heading">L</span>
-    <span class="heading">E</span>
-    &nbsp;
-    <span class="modal">
-      <button class="control-stats" onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" title="stats">📊</button>
-    </span>
+<div id="id-app-container" class="app-container">
+  <div id="id-title-container" class="section">
+    <div id="id-info-button" style="width: 30%; text-align: left;">
+      <button class="control-info" onclick="document.getElementById('id-info-modal').style.display='block'" title="info &amp; help">ⓘ
+      </button>
+    </div>
+    <div style="display: flex; width: 35%; text-align: left;">
+      <div class="title">B</div>&nbsp;
+      <div class="title">R</div>&nbsp;
+      <div class="title">A</div>&nbsp;
+      <div class="title">G</div>&nbsp;
+      <div class="title">G</div>&nbsp;
+      <div class="title">L</div>&nbsp;
+      <div class="title">E</div>
+    </div>
+    <div id="id-stats-button" style="width: 40%; text-align: right; padding-top: 0.3em; padding-right: 1em;">
+      <button class="control-stats" onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" title="stats">📊
+      </button>
+    </div>
+  </div>
+  <div id="id-app"></div>
+
+  <!-- Info display modal -->
+  <div id="id-info-modal" class="modal">
+    <div class="modal-content">
+      <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'">
+        ✕
+      </div>
+      <p class="blurb">
+        Use
+        <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
+        skills to learn Scrabble words
+      </p>
+      <p>
+        Try and guess the secret word.
+        The secret word is selected at random from allowed Scrabble words.
+      </p>
+      <p>
+        You may choose the length of the words. There are:
+      </p>
+      <ul>
+        <li>1,065 three letter playable Scrabble words,</li>
+        <li>3,989 four letter playable Scrabble words,</li>
+        <li>2,313 five letter words (12,970 guessable), and</li>
+        <li>24,004 seven letter playable Scrabble words.</li>
+      </ul>
+      <p>Clues:</p>
+      <ul>
+        <li>
+          <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position,
+        </li>
+        <li>
+          <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position,
+          and
+        </li>
+        <li>
+          <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word, or is redundant in the
+          guess.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Statistics display modal -->
+  <div id="id-stats-modal" class="modal">
+    <div class="modal-content">
+      <div class="control-close" onclick="document.getElementById('id-stats-modal').style.display='none'">
+        ✕
+      </div>
+      <div style="padding-bottom: 0.5em; text-decoration: underline;">Played</div>
+      <span id="id-stats-played"></span><br>
+      <br>
+      <div style="padding-bottom: 0.5em; text-decoration: underline;">Wins</div>
+      <table>
+        <tbody><tr>
+          <td class="stats-won">1 guess
+          </td><td id="id-stats-won-in-1" class="stats-won"></td>
+          <td class="stats-won-divider">&nbsp;</td>
+          <td class="stats-won">5 guesses
+          </td><td id="id-stats-won-in-5" class="stats-won"></td>
+        </tr>
+        <tr>
+          <td class="stats-won">2 guesses
+          </td><td id="id-stats-won-in-2" class="stats-won"></td>
+          <td class="stats-won-divider">&nbsp;</td>
+          <td class="stats-won">6 guesses
+          </td><td id="id-stats-won-in-6" class="stats-won"></td>
+        </tr>
+        <tr>
+          <td class="stats-won">3 guesses
+          </td><td id="id-stats-won-in-3" class="stats-won"></td>
+          <td class="stats-won-divider">&nbsp;</td>
+          <td class="stats-won">7 guesses
+          </td><td id="id-stats-won-in-7" class="stats-won"></td>
+        </tr>
+        <tr>
+          <td class="stats-won">4 guesses
+          </td><td id="id-stats-won-in-4" class="stats-won"></td>
+        </tr>
+      </tbody></table>
+    </div>
   </div>
 </div>
-<br>
-<br>
+
+<!-- Clipboard buffer -->
 <textarea id="id-clipboard" class="clipboard">&lt;</textarea>
-<div id="id-info-modal" class="modal" style="display: none;">
-  <div class="modal-content">
-    <div class="control-close" onclick="document.getElementById('id-info-modal').style.display='none'">
-      ✕
-    </div>
-    <p class="blurb">
-      Use
-      <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>
-      skills to learn Scrabble words
-    </p>
-    <p>
-      Try and guess the secret word.
-      The secret word is selected at random from allowed Scrabble words.
-    </p>
-    <p>
-      You may choose the length of the words. There are:
-    </p>
-    <ul>
-      <li>1,065 three letter playable Scrabble words,</li>
-      <li>3,989 four letter playable Scrabble words,</li>
-      <li>2,313 five letter words (12,970 guessable), and</li>
-      <li>24,004 seven letter playable Scrabble words.</li>
-    </ul>
-    <p>Clues:</p>
-    <ul>
-      <li>
-        <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position,
-      </li>
-      <li>
-        <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position,
-        and
-      </li>
-      <li>
-        <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word, or is redundant in the
-        guess.
-      </li>
-    </ul>
-  </div>
-</div>
-<div id="id-stats-modal" class="modal" style="display: none;">
-  <div class="modal-content">
-    <div class="control-close" onclick="document.getElementById('id-stats-modal').style.display='none'">
-      ✕
-    </div>
-    <div style="padding-bottom: 0.5em; text-decoration: underline;">Played</div>
-    <span id="id-stats-played"></span><br>
-    <br>
-    <div style="padding-bottom: 0.5em; text-decoration: underline;">Wins</div>
-    <table>
-      <tbody><tr>
-        <td class="stats-won">1 guess
-        </td><td id="id-stats-won-in-1" class="stats-won"></td>
-        <td class="stats-won-divider">&nbsp;</td>
-        <td class="stats-won">5 guesses
-        </td><td id="id-stats-won-in-5" class="stats-won"></td>
-      </tr>
-      <tr>
-        <td class="stats-won">2 guesses
-        </td><td id="id-stats-won-in-2" class="stats-won"></td>
-        <td class="stats-won-divider">&nbsp;</td>
-        <td class="stats-won">6 guesses
-        </td><td id="id-stats-won-in-6" class="stats-won"></td>
-      </tr>
-      <tr>
-        <td class="stats-won">3 guesses
-        </td><td id="id-stats-won-in-3" class="stats-won"></td>
-        <td class="stats-won-divider">&nbsp;</td>
-        <td class="stats-won">7 guesses
-        </td><td id="id-stats-won-in-7" class="stats-won"></td>
-      </tr>
-      <tr>
-        <td class="stats-won">4 guesses
-        </td><td id="id-stats-won-in-4" class="stats-won"></td>
-      </tr>
-    </tbody></table>
-  </div>
-</div>
-<div id="id-app"></div>
 
 
-<script type="module">import init from '/index-1680d66adfbb390c.js';init('/index-1680d66adfbb390c_bg.wasm');</script></body></html>
+
+<script type="module">import init from '/index-618eac5bc8c07afe.js';init('/index-618eac5bc8c07afe_bg.wasm');</script></body></html>
