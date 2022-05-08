@@ -16,6 +16,7 @@
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
+
   </script>
   <style>
     :root {
@@ -34,7 +35,7 @@
       /* border: 1px solid gray; // FOR LAYOUT DEBUG */
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 1em;
+      margin-bottom: 1.5em;
       text-align: center;
       width: var(--app-width);
     }
@@ -131,10 +132,6 @@
     .definition-image {
       width: 1em;
     }
-    .share-image {
-      height: 20px;
-      margin-top: 1em;
-    }
     .empty {
       background-size: 1em;
       border: none;
@@ -150,10 +147,13 @@
       font-size: 1em;
       text-align: center;
       text-decoration: none;
+      text-transform: uppercase;
     }
-    .challenge-image {
-      height: 1em;
-      margin-top: 1em;
+    .challenge-image, .reload-image, .share-image {
+      height: 20px;
+      padding-left: 1em;
+      padding-right: 1em;
+      vertical-align: bottom;
     }
     .control-close {
       color: gray;
@@ -213,6 +213,7 @@
     }
     .status {
       font-size: 1em;
+      height: 2em;
       margin-bottom: 1em;
       text-align: center;
     }
@@ -221,8 +222,8 @@
    }
   </style>
 
-<link rel="preload" href="/index-7023fe7829c47989_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-7023fe7829c47989.js"></head>
+<link rel="preload" href="/index-eae08984d3c514de_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-eae08984d3c514de.js"></head>
 <body>
 <div id="id-app-container" class="app-container">
   <div id="id-title-container" class="section">
@@ -331,4 +332,4 @@
 
 
 
-<script type="module">import init from '/index-7023fe7829c47989.js';init('/index-7023fe7829c47989_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-eae08984d3c514de.js';init('/index-eae08984d3c514de_bg.wasm');</script></body></html>
