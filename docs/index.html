@@ -69,17 +69,15 @@
       border: 1px solid lightgray;
       height: 1em;
     }
-    td.stats-won {
-      border: none;
-      font-size: 0.9em;
-    }
-    td.stats-won-divider {
-      border: none;
-      padding-right: 1em;
-    }
     td.definition-link-wrapper {
       border: none;
       vertical-align: top;
+      width: 2em;
+    }
+    td.empty {
+      background-size: 1em;
+      border: none;
+      padding: 1em;
     }
     tr {
       border: none;
@@ -132,11 +130,7 @@
     .definition-image {
       width: 1em;
     }
-    .empty {
-      background-size: 1em;
-      border: none;
-      padding: 1em;
-    }
+
     .control, .control-challenge, .control-info, .control-reload, .control-share, .control-stats {
       background-color: var(--background-color);
       border: none;
@@ -149,11 +143,14 @@
       text-decoration: none;
       text-transform: uppercase;
     }
-    .challenge-image, .reload-image, .share-image {
-      height: 20px;
+    .control-reload {
+      font-size: 1.5em; /* Symbol is shorter than uppercase letters. */
+    }
+    .challenge-image, .share-image {
+      height: 1em;
       padding-left: 1em;
       padding-right: 1em;
-      vertical-align: bottom;
+      vertical-align: top;
     }
     .control-close {
       color: gray;
@@ -168,9 +165,6 @@
     }
     .control-info {
       font-size: 2.5em;
-    }
-    .control-reload {
-      font-size: 1.5em;
     }
     .modal {
       display: none;
@@ -209,21 +203,25 @@
     .key-present {
       background-color: var(--clue-present-color);
     }
+    #id-status-section {
+      padding-left: 3em;
+      height: 1.5em;
+    }
     #id-keyboard {
     }
     .status {
       font-size: 1em;
       height: 2em;
       margin-bottom: 1em;
-      text-align: center;
+      text-align: left;
     }
    #id-title-container {
      display: flex;
    }
   </style>
 
-<link rel="preload" href="/index-a697391644e173ea_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-a697391644e173ea.js"></head>
+<link rel="preload" href="/index-f25800c02f672375_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-f25800c02f672375.js"></head>
 <body>
 <div id="id-app-container" class="app-container">
   <div id="id-title-container" class="section">
@@ -332,4 +330,4 @@
 
 
 
-<script type="module">import init from '/index-a697391644e173ea.js';init('/index-a697391644e173ea_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-f25800c02f672375.js';init('/index-f25800c02f672375_bg.wasm');</script></body></html>
