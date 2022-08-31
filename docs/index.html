@@ -17,14 +17,16 @@
       }
     }
 
+
+
   </script>
   <style>
     :root {
       --app-width: 25em;  /* Calculated to prevent keyboard rows from wrapping. */
       --background-color: white;
-      --clue-correct-color: darkseagreen;
-      --clue-present-color: tan;
-      --clue-absent-color: gray;
+      --clue-at-color: darkseagreen;
+      --clue-not-at-color: gold;
+      --clue-redundant-color: gray;
       --modal-width: 24em;  /* Smaller than --app-width. */
     }
     a, a:link {
@@ -88,7 +90,7 @@
       text-align: center;
       width: var(--app-width);
     }
-    .block, .block-none, .block-guess, .block-clue-absent, .block-clue-correct, .block-clue-present {
+    .block, .block-none, .block-guess, .block-clue-redundant, .block-clue-at, .block-clue-not-at {
       font-family: Arial;
       font-size: 1.8em;
       font-weight: bold;
@@ -103,16 +105,16 @@
       background-color: var(--background-color);
       color: black;
     }
-    .block-clue-absent {
-      background-color: var(--clue-absent-color);
+    .block-clue-redundant {
+      background-color: var(--clue-redundant-color);
       color: var(--background-color);
     }
-    .block-clue-correct {
-      background-color: var(--clue-correct-color);
+    .block-clue-at {
+      background-color: var(--clue-at-color);
       color: var(--background-color);
     }
-    .block-clue-present {
-      background-color: var(--clue-present-color);
+    .block-clue-not-at {
+      background-color: var(--clue-not-at-color);
       color: var(--background-color);
     }
     .blurb {
@@ -180,7 +182,7 @@
       top: 0;
       width: var(--modal-width);
     }
-    .key, .key-absent, .key-correct, .key-present {
+    .key, .key-redundant, .key-at, .key-not-at {
       border-radius: 8px;
       border: none;
       cursor: pointer;
@@ -194,14 +196,14 @@
     .key {
       background-color: lightgray;
     }
-    .key-absent {
-      background-color: var(--clue-absent-color);
+    .key-redundant {
+      background-color: var(--clue-redundant-color);
     }
-    .key-correct {
-      background-color: var(--clue-correct-color);
+    .key-at {
+      background-color: var(--clue-at-color);
     }
-    .key-present {
-      background-color: var(--clue-present-color);
+    .key-not-at {
+      background-color: var(--clue-not-at-color);
     }
     #id-status-section {
       padding-left: 3em;
@@ -218,10 +220,12 @@
    #id-title-container {
      display: flex;
    }
+
+
   </style>
 
-<link rel="preload" href="/index-f837f85e22a91465_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-f837f85e22a91465.js"></head>
+<link rel="preload" href="/index-804ae9c9c28a47bb_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/index-804ae9c9c28a47bb.js"></head>
 <body>
 <div id="id-app-container" class="app-container">
   <div id="id-title-container" class="section">
@@ -267,14 +271,14 @@
       <p>Clues:</p>
       <ul>
         <li>
-          <span class="block-clue-correct" style="font-size: 1em;">A</span> is in the correct position,
+          <span class="block-clue-at" style="font-size: 1em;">A</span> is in the correct position,
         </li>
         <li>
-          <span class="block-clue-present" style="font-size: 1em;">B</span> is in the word, but not at this position,
+          <span class="block-clue-not-at" style="font-size: 1em;">B</span> is in the word, but not at this position,
           and
         </li>
         <li>
-          <span class="block-clue-absent" style="font-size: 1em;">C</span> is not in the word, or is redundant in the
+          <span class="block-clue-redundant" style="font-size: 1em;">C</span> is not in the word, or is redundant in the
           guess.
         </li>
       </ul>
@@ -330,4 +334,4 @@
 
 
 
-<script type="module">import init from '/index-f837f85e22a91465.js';init('/index-f837f85e22a91465_bg.wasm');</script></body></html>
+<script type="module">import init from '/index-804ae9c9c28a47bb.js';init('/index-804ae9c9c28a47bb_bg.wasm');</script></body></html>
