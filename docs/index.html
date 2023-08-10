@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
   
+  <script type="module">import init from '/web_braggle-4ae801c7ef62c2aa.js';init('/web_braggle-4ae801c7ef62c2aa_bg.wasm');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Braggle</title>
@@ -16,16 +17,14 @@
         document.getElementById("id-stats-won-in-" + i).innerText = ": " + (localStorage.getItem(i) || "0");
       }
     }
-
-
-
   </script>
+  <link href="https://db.onlinewebfonts.com/c/6a5750dec5478ff0c57f34f974f1239d?family=Microgramma+W01+Med+Extended" rel="stylesheet" type="text/css">
   <style>
     :root {
       --app-width: 25em;  /* Calculated to prevent keyboard rows from wrapping. */
       --background-color: white;
       --clue-at-color: darkseagreen;
-      --clue-not-at-color: gold;
+      --clue-not-at-color: rgba(255, 222, 104, 0.936);
       --clue-redundant-color: gray;
       --modal-width: 24em;  /* Smaller than --app-width. */
     }
@@ -42,12 +41,12 @@
       width: var(--app-width);
     }
     html {
-      font-family: Sans-Serif;
+      font-family: "Microgramma W01 Med Extended";
       text-align: center;
     }
     .title {
-      font-family: monospace;
-      font-size: 2.5em;
+      font-family: "Microgramma W01 Med Extended";
+      font-size: 2em;
       font-weight: bold;
       text-align: center;
       text-decoration: underline;
@@ -91,11 +90,13 @@
       width: var(--app-width);
     }
     .block, .block-none, .block-guess, .block-clue-redundant, .block-clue-at, .block-clue-not-at {
-      font-family: Arial;
+      border-radius: 16px;
+      font-family: "Microgramma W01 Med Extended";
       font-size: 1.8em;
       font-weight: bold;
       text-align: center;
-      width: 1.5em;
+      width: 2em;
+      padding-top: 0.15em;
     }
     .block-none {
       background-color: var(--background-color);
@@ -136,17 +137,17 @@
     .control, .control-challenge, .control-info, .control-reload, .control-share, .control-stats {
       background-color: var(--background-color);
       border: none;
-      color: gray;
+      color: steelblue;
       cursor: pointer;
       display: inline-block;
-      font-family: monospace;
-      font-size: 1em;
+      font-family: "Microgramma W01 Med Extended";
+      font-size: 0.75em;
       text-align: center;
       text-decoration: none;
-      text-transform: uppercase;
+      text-transform: lowercase;
     }
     .control-reload {
-      font-size: 1.5em; /* Symbol is shorter than uppercase letters. */
+      font-size: 0.8em; /* Symbol is shorter than uppercase letters. */
     }
     .challenge-image, .share-image {
       height: 1em;
@@ -162,11 +163,12 @@
       text-decoration: underline;
     }
     .control-info, .control-stats {
-      color: dimgray;
-      font-size: 2em;
+      color: steelblue;
+      font-size: 0.8em;
+      vertical-align: bottom;
     }
     .control-info {
-      font-size: 2.5em;
+      text-transform: lowercase;
     }
     .modal {
       display: none;
@@ -175,7 +177,7 @@
       background-color: var(--background-color);
       border-radius: 5px;
       box-shadow: 5px 5px 5px lightgray;
-      font-size: 0.8em;
+      font-size: 1em;
       padding: 1em 2em 1em 2em;
       position: absolute;
       text-align: left;
@@ -185,16 +187,18 @@
     .key, .key-redundant, .key-at, .key-not-at {
       border-radius: 8px;
       border: none;
+      color: steelblue;
       cursor: pointer;
       display: inline-block;
-      font-family: monospace;
-      font-size: 1.3em;
-      margin: 0.5em 0.25em 0.5em 0.25em;
-      padding: 0.5em;
+      font-family: "Microgramma W01 Med Extended";
+      font-size: 1em;
+      margin: 0.25em 0.25em 0.25em 0.25em;
+      height: 2em;
+      width: 2em;
       text-decoration: none;
     }
     .key {
-      background-color: lightgray;
+      background-color: white;
     }
     .key-redundant {
       background-color: var(--clue-redundant-color);
@@ -209,8 +213,6 @@
       padding-left: 3em;
       height: 1.5em;
     }
-    #id-keyboard {
-    }
     .status {
       font-size: 1em;
       height: 2em;
@@ -224,16 +226,13 @@
 
   </style>
 
-<link rel="preload" href="/index-d4a21099081a09c0_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/index-d4a21099081a09c0.js"></head>
+<link rel="preload" href="/web_braggle-4ae801c7ef62c2aa_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/web_braggle-4ae801c7ef62c2aa.js"></head>
 <body>
+
 <div id="id-app-container" class="app-container">
   <div id="id-title-container" class="section">
-    <div id="id-info-button" style="width: 30%; text-align: left;">
-      <button class="control-info" onclick="document.getElementById('id-info-modal').style.display='block'" title="info &amp; help">ⓘ
-      </button>
-    </div>
-    <div style="display: flex; width: 35%; text-align: left;">
+    <div style="display: flex; text-align: left; width: 60pc">
       <div class="title">B</div>&nbsp;
       <div class="title">R</div>&nbsp;
       <div class="title">A</div>&nbsp;
@@ -242,9 +241,11 @@
       <div class="title">L</div>&nbsp;
       <div class="title">E</div>
     </div>
-    <div id="id-stats-button" style="width: 40%; text-align: right; padding-top: 0.3em; padding-right: 1em;">
-      <button class="control-stats" onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" title="stats">📊
-      </button>
+    <div style="text-align: right;">
+      <div style="text-align: right; color: steelblue">
+        <button class="control-stats" onclick="populateStats(); document.getElementById('id-stats-modal').style.display='block';" title="stats">▅▃▇</button>
+        <button class="control-info" onclick="document.getElementById('id-info-modal').style.display='block'" title="info &amp; help">info</button>
+      </div>
     </div>
   </div>
   <div id="id-app"></div>
@@ -334,4 +335,4 @@
 
 
 
-<script type="module">import init from '/index-d4a21099081a09c0.js';init('/index-d4a21099081a09c0_bg.wasm');</script></body></html>
+</body></html>
